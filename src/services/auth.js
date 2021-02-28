@@ -1,5 +1,16 @@
 import auth from '@react-native-firebase/auth';
 import { Alert } from 'react-native';
+import firestore from '@react-native-firebase/firestore';
+
+const createUserInDb = (uid, fullName, email) => {
+    return firestore().collection('users').doc(uid).set(
+        {
+            uid,
+            fullName,
+            email
+        }
+    )
+}
 
 // signup handling
 const signUp = (fullName, email, password) => {
@@ -17,6 +28,7 @@ const signUp = (fullName, email, password) => {
 
         return uid
     })
+    .then( uid => createUserInDb(uid, fullName, email))
     .catch(
         err => Alert.alert(err.code, err.message)
     )

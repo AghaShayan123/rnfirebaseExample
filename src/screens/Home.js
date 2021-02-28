@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { Button, Input } from '../components'
+import { Button, Input, TextButton } from '../components'
 // service
 import {Auth} from '../services'
 
-export default Home = () => {
+export default Home = ({navigation}) => {
 
     const [ email, setEmail ] = useState()
 
@@ -21,6 +21,15 @@ export default Home = () => {
             <Button 
                 buttonText= "Send Invitation"
                 onPress= { () => Auth.inviteUser(email)}
+            />
+
+            <TextButton
+                text="Add Products"
+                onPress= { () => navigation.navigate('AddProduct')}
+            />
+            <TextButton
+                text="View Products"
+                onPress= { () => navigation.navigate('Products')}
             />
 
             <TouchableOpacity onPress={() => Auth.signOut()}>
