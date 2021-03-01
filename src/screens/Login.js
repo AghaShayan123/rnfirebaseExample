@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { ScrollView, StyleSheet, Text } from 'react-native';
 import { colors } from '../constants';
-import { Button, Input, TextButton } from '../components';
+import { Button, Input, TextButton, SocialButton } from '../components';
 // service
 import {Auth} from '../services'
-
-const {width, height} = Dimensions.get('window');
 
 export default Login = ({navigation}) => {
 
@@ -13,7 +11,12 @@ export default Login = ({navigation}) => {
     const [ password, setPassword ] = useState()
 
     return(
-        <View style={styles.container}>
+        <ScrollView 
+            style={styles.scroll}
+            contentContainerStyle={styles.container}
+        >
+            <Text style={styles.heading}>Login</Text>
+
             <Input 
                 placeholder= "Email"
                 value={email}
@@ -36,21 +39,42 @@ export default Login = ({navigation}) => {
                 onPress={() => Auth.signIn(email, password)}
             />
 
+            <SocialButton  
+                buttonText= "Facebook Sign In"
+                backgroundColor= {colors.facebook}
+                onPress={() => Auth.facebookSignIn()}
+            />
+
+            <SocialButton  
+                buttonText= "Google Sign In"
+                backgroundColor= {colors.google}
+            />
+
+            <SocialButton  
+                buttonText= "Twitter Sign In"
+                backgroundColor= {colors.twitter}
+            />
+
             <TextButton 
                 text="Have not an account? SignUp"
                 onPress={() => navigation.navigate('SignUp')}
             />
-        </View>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
+    scroll:{
+        flex: 1
+    },
     container:{
-        height,
-        width,
-        flex: 1,
         backgroundColor: colors.white,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    heading:{
+        fontSize: 24,
+        fontWeight: 'bold',
+        paddingVertical: 20,
     }
 })
