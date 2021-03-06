@@ -2,6 +2,18 @@ import auth from '@react-native-firebase/auth';
 import { Alert } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import { LoginManager, AccessToken } from 'react-native-fbsdk';
+import { GoogleSignin } from '@react-native-community/google-signin';
+
+const googleLogin = async() => {
+    // Get the users ID token
+  const { idToken } = await GoogleSignin.signIn();
+
+  // Create a Google credential with the token
+  const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+  // Sign-in the user with the credential
+  return auth().signInWithCredential(googleCredential);
+}
 
 const facebookSignIn = async() => {
     // Attempt login with permissions
@@ -116,7 +128,8 @@ const Auth = {
     forgetPassword,
     signOut,
     inviteUser,
-    facebookSignIn
+    facebookSignIn,
+    googleLogin
 }
 
 export default Auth

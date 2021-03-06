@@ -48,6 +48,7 @@ export default Login = ({navigation}) => {
             <SocialButton  
                 buttonText= "Google Sign In"
                 backgroundColor= {colors.google}
+                onPress={() => Auth.googleLogin()}
             />
 
             <SocialButton  
