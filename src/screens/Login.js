@@ -60,6 +60,10 @@ export default Login = ({navigation}) => {
                 text="Have not an account? SignUp"
                 onPress={() => navigation.navigate('SignUp')}
             />
+            <TextButton 
+                text="SignUp with Phone No"
+                onPress={() => navigation.navigate('OtpSignUp')}
+            />
         </ScrollView>
     )
 }

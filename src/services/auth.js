@@ -122,6 +122,20 @@ const inviteUser = (email) => {
     )
 }
 
+const sendOtp = (number) => {
+    if(!number){
+        Alert.alert('Error', 'Please Enter number')
+    }
+
+    return auth().signInWithPhoneNumber(number)
+}
+
+const confirmCode = (state, code) => {
+    return state.confirm(code)
+    .then(() => {})
+    .catch(err => Alert.alert(err.code, err.message))
+}
+
 const Auth = {
     signUp,
     signIn,
@@ -129,7 +143,9 @@ const Auth = {
     signOut,
     inviteUser,
     facebookSignIn,
-    googleLogin
+    googleLogin,
+    sendOtp,
+    confirmCode
 }
 
 export default Auth
